@@ -54,7 +54,16 @@ public class EndangeredTest extends TestCase {
     public void saveEndangeredToDatabase(){
         Endangered newEndangered=new Endangered("white Rhino",1,true,"Okay",20);
         newEndangered.save();
-        assertTrue(Animal.all().get(0).equals(newEndangered));
+        assertTrue(Endangered.all().get(1).equals(newEndangered));
+
+    }
+
+    @Test
+    public void returnAllInstancesOfEndangered(){
+        Endangered newEndangered=new Endangered("white Rhino",1,true,"Okay",20);
+        Endangered newestEndangered=new Endangered("Impala",2,true,"Okay",10);
+        assertEquals(true,Endangered.all().get(1).equals(newEndangered));
+        assertEquals(true,Endangered.all().get(2).equals(newestEndangered));
 
     }
 
