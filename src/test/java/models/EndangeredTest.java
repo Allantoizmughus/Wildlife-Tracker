@@ -38,5 +38,16 @@ public class EndangeredTest extends TestCase {
     }
 
 
+    @Test
+    public void returnHealthOfEndangered_String(){
+        Endangered newEndangered=new Endangered("white Rhino",1,true,"Okay",20);
+        assertEquals("okay",newEndangered.getHealth());
+    }
+
+    @Test
+    public void returnAgeOfEndangered_String(){
+        Endangered newEndangered=new Endangered("white Rhino",1,true,"Okay",20);
+        assertEquals(20,newEndangered.getAge());
+    }
 
 }
