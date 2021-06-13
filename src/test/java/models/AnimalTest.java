@@ -56,6 +56,8 @@ public class AnimalTest extends TestCase {
         assertEquals(Animal.find(newestAnimal.getId()),newestAnimal);
     }
 
+
+
     @Test
     public void deleteAnimal_true(){
         Animal newAnimal=new Animal("Lion");
