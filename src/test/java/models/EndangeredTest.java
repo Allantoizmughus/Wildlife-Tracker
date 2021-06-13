@@ -24,4 +24,15 @@ public class EndangeredTest extends TestCase {
         assertEquals("Rhino",newEndangered.getName());
     }
 
+    @Test
+    public void returnIdOfEndangered_int(){
+        Endangered newEndangered=new Endangered("white Rhino",1,true,"Okay",20);
+        assertEquals(1,newEndangered.getId());
+    }
+
+
+
+
+
+
 }
