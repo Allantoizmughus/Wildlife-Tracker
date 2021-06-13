@@ -1,4 +1,52 @@
 {{#partial "contnet"}}
 
+    <div class="form">
+        <center>
+            <h1>Add your Record here!</h1>
+            <form action="/animal/new" method="post">
+                <label>Animal Species</label>
+                <input type="text" name="name">
+                <label>Endangered?</label>
+                <input type="checkbox" name="endangered">
+                <button type="submit" class="btn">Add Animal</button>
+            </form>
+        </center>
+    </div>
+
+    <h2>If the animal you've spotted is of endangered type, please FILL its details in the form below.</h2>
+
+    <form action="/endangered_sighting" method="post">
+        #if($endangeredAnimals.size() >= 0)
+        <label>Select Endangered Animal</label>
+        <select name="endangeredAnimalSelected">
+            #foreach($endangered_animal in $endangeredAnimals)
+            <option value="$endangered_animal.getId()">$endangered_animal.getName()</option>
+            #end
+        </select>
+        </br>
+        <label>Health</label>
+        &emsp;<select name="health">
+        <option>Sick</option>
+        <option>Okay</option>
+        <option>Healthy</option>
+    </select>
+        <br>
+        <label>Age</label>
+        &emsp;<select name="age">
+        <option>Newborn</option>
+        <option>Young</option>
+        <option>Adult</option>
+    </select>
+        </br>
+        <label>Location</label>
+        &emsp;<input type="text" name="latLong">
+        </br>
+        <label>Your Name</label>
+        &emsp;<input type="text" name="rangerName">
+        <br>
+        <button type="submit" class="btn">Submit Report</button>
+        #end
+    </form>
+
 {{/partial}}
 {{layout.hbs}}
