@@ -31,7 +31,11 @@ public class EndangeredTest extends TestCase {
     }
 
 
-
+    @Test
+    public void returnEndangeredOfEndangered_boolean(){
+        Endangered newEndangered=new Endangered("white Rhino",1,true,"Okay",20);
+        assertEquals(true,newEndangered.isEndangered());
+    }
 
 
 
