@@ -43,4 +43,21 @@ public class SightingTest extends TestCase {
         Sighting newSighting=new Sighting(1,"River","Kulu",1);
         assertEquals(1,newSighting.getId());
     }
+
+    @Test
+    public void saveSightingToDatabase(){
+        Sighting newSighting=new Sighting(1,"River","Kulu",1);
+        newSighting.save();
+        assertTrue(Sighting.all().get(1).equals(newSighting));
+
+    }
+
+    @Test
+    public void returnAllInstancesOfSighting(){
+        Sighting newSighting=new Sighting(1,"River","Kulu",1);
+        Sighting newestSighting=new Sighting(2,"BlackForest","Nana",2);
+        assertEquals(true,Sighting.all().get(1).equals(newSighting));
+        assertEquals(true,Sighting.all().get(2).equals(newestSighting));
+
+    }
 }
