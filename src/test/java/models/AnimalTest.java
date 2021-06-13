@@ -14,20 +14,37 @@ public class AnimalTest extends TestCase {
 
     @Test
     public void returnAllInstancesOfAnimal_true(){
-        Animal animal=new Animal("Lion");
-        assertEquals(true, animal instanceof Animal);
+        Animal newAnimal=new Animal("Lion");
+        assertEquals(true, newAnimal instanceof Animal);
     }
 
     @Test
     public void returnNameOfAnimal_String(){
-        Animal animal=new Animal("Lion");
-        assertEquals("Lion", animal.getName());
+        Animal newAnimal=new Animal("Lion");
+        assertEquals("Lion", newAnimal.getName());
 
     }
     @Test
     public void returnIdOfAnimal_int(){
-        Animal animal=new Animal("Lion");
-        assertEquals(1,animal.getId());
+        Animal newAnimal=new Animal("Lion");
+        assertEquals(1,newAnimal.getId());
+    }
+
+    @Test
+    public void saveAnimalToDatabase(){
+        Animal newAnimal=new Animal("Lion");
+        newAnimal.save();
+        assertTrue(Animal.all().get(0).equals(newAnimal));
+
+    }
+
+    @Test
+    public void returnsAllInstancesOfAnimal_true(){
+        Animal newAnimal=new Animal("Lion");
+        Animal newestAnimal=new Animal("Lioness");
+        assertEquals(true,Animal.all().get(0).equals(newAnimal));
+        assertEquals(true,Animal.all().get(1).equals(newestAnimal));
+
     }
 
 }

@@ -1,6 +1,11 @@
 package models;
 
-public class Animal {
+import dao.AnimalInterface;
+import org.sql2o.Connection;
+
+import java.util.List;
+
+public class Animal implements AnimalInterface {
     public String name;
     public int id;
 
@@ -15,5 +20,34 @@ public class Animal {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object otherAnimal) {
+        if(!(otherAnimal instanceof Animal)) {
+            return false;
+        } else {
+            Animal newAnimal = (Animal) otherAnimal;
+            return this.getName().equals(newAnimal.getName());
+        }
+    }
+
+    @Override
+    public void save() {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "INSERT INTO animals (name) VALUES (:name);";
+            this.id = (int) con.createQuery(sql, true)
+                    .addParameter("name", this.name)
+                    .executeUpdate()
+                    .getKey();
+        }
+    }
+
+    public static List<Animal> all() {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM animals;";
+            return con.createQuery(sql)
+                    .executeAndFetch(Animal.class);
+        }
     }
 }
