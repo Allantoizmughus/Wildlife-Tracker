@@ -50,4 +50,36 @@ public class Animal implements AnimalInterface {
                     .executeAndFetch(Animal.class);
         }
     }
+
+    public static Animal find(int id) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM animals WHERE id = :id;";
+            Animal animal = con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Animal.class);
+            return animal;
+        } catch (IndexOutOfBoundsException exception) {
+            return null;
+        }
+    }
+
+    public void updateName(String name) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "UPDATE animals SET name = :name WHERE id = :id;";
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .addParameter("name", name)
+                    .executeUpdate();
+        }
+    }
+
+    public void delete() {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "DELETE FROM animals WHERE id = :id;";
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        }
+    }
+
 }

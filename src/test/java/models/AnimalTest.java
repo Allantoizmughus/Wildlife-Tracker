@@ -47,4 +47,22 @@ public class AnimalTest extends TestCase {
 
     }
 
+    @Test
+    public void findAnimalWithId(){
+        Animal newAnimal=new Animal("Lion");
+        newAnimal.save();
+        Animal newestAnimal=new Animal("Lioness");
+        newestAnimal.save();
+        assertEquals(Animal.find(newestAnimal.getId()),newestAnimal);
+    }
+
+    @Test
+    public void deleteAnimal_true(){
+        Animal newAnimal=new Animal("Lion");
+        newAnimal.save();
+        newAnimal.delete();
+        assertEquals(null,Animal.find(newAnimal.getId()));
+
+    }
+
 }
