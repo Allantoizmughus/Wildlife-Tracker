@@ -26,4 +26,9 @@ public class SightingTest extends TestCase {
         assertEquals(1,newSighting.getAnimal_id());
     }
 
+    @Test
+    public void returnLocationOfSighting_String(){
+        Sighting newSighting=new Sighting(1,"River","Kulu",1);
+        assertEquals("River",newSighting.getLocation());
+    }
 }
