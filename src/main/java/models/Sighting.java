@@ -9,14 +9,14 @@ import java.util.List;
 public class Sighting implements SightingInterface {
     public int animal_id;
     public String location;
-    public String RangerName;
+    public String rangerName;
     public int id;
     public Timestamp date;
 
-    public Sighting(int animal_id, String location, String RangerName,int id){
+    public Sighting(int animal_id, String location, String rangerName,int id){
         this.animal_id=animal_id;
         this.location=location;
-        this.RangerName=RangerName;
+        this.rangerName=rangerName;
         this.id=id;
         this.date=date;
     }
@@ -30,7 +30,7 @@ public class Sighting implements SightingInterface {
     }
 
     public String getRangerName() {
-        return RangerName;
+        return rangerName;
     }
 
     public int getId() {
@@ -58,7 +58,7 @@ public class Sighting implements SightingInterface {
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("animal_id", this.animal_id)
                     .addParameter("location", this.location)
-                    .addParameter("rangerName", this.RangerName)
+                    .addParameter("rangerName", this.rangerName)
                     .throwOnMappingFailure(false)
                     .executeUpdate()
                     .getKey();

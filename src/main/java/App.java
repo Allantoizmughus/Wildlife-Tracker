@@ -22,7 +22,7 @@ public class App {
     public static void main(String[] args){
         port(getHerokuAssignedPort());
         staticFileLocation("/public");
-        String connectionString = "jdbc:postgresql://ec2-23-21-246-11.compute-1.amazonaws.com:5432/d6isspi7k46sgs";
+        String connectionString = "jdbc:postgresql://localhost:4567/wildlife_tracker";
         Sql2o sql2o = new Sql2o(connectionString, "", "");
 
 
@@ -30,7 +30,6 @@ public class App {
         //display homepage
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("template", "templates/index.hbs" );
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -41,7 +40,7 @@ public class App {
         },new HandlebarsTemplateEngine());
 
         //add new animal
-        post("animal/add",(request, response) -> {
+        post("animal/new",(request, response) -> {
             boolean endangered = request.queryParams("endangered")!=null;
             if (endangered) {
                 String name = request.queryParams("name");
@@ -66,9 +65,9 @@ public class App {
             String health = request.queryParams("health");
             String age = request.queryParams("age");
             String location = request.queryParams("location");
-            String RangerName = request.queryParams("RangerName");
+            String rangerName = request.queryParams("rangerName");
             int id=Integer.parseInt(request.queryParams("id"));
-            Sighting newSighting = new Sighting(animal_id, location, RangerName,id);
+            Sighting newSighting = new Sighting(animal_id, location, rangerName,id);
             newSighting.save();
             model.put("newSighting",newSighting);
             model.put("animals", Animal.all());
@@ -82,20 +81,38 @@ public class App {
             Map<String, Object> model = new HashMap<String, Object>();
             int animal_id = Integer.parseInt(request.queryParams("animalSelected"));
             String location = request.queryParams("location");
-            String RangerName=request.queryParams("RangerName");
+            String rangerName=request.queryParams("rangerName");
             int id=Integer.parseInt(request.queryParams("id"));
-            Sighting newSighting = new Sighting(animal_id, location, RangerName,id);
+            Sighting newSighting = new Sighting(animal_id, location, rangerName,id);
             newSighting.save();
             model.put("newSighting",newSighting);
             return new ModelAndView(model, "allSightings.hbs");
         },new HandlebarsTemplateEngine());
 
-        //display sighting form
-        get("/sighting", (request, response) -> {
+        //display animals page
+        get("/endangered_animal", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             model.put("animals", Animal.all());
             model.put("endangeredAnimals", Endangered.all());
             return new ModelAndView(model, "allSightings.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //displaying sightings page
+        get("/sightings", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            model.put("animals", Animal.all());
+            model.put("endangeredAnimals", Endangered.all());
+            model.put("sightings", Sighting.all());
+            return new ModelAndView(model, "allAnimals.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //display animals page
+
+
+        //error message page
+        get("/error",(request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            return new ModelAndView(model, "error.hbs");
         },new HandlebarsTemplateEngine());
     }
 
