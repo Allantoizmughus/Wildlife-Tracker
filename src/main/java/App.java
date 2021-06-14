@@ -1,5 +1,11 @@
-import static spark.Spark.port;
-import static spark.Spark.staticFileLocation;
+import org.sql2o.Sql2o;
+import spark.ModelAndView;
+import spark.template.handlebars.HandlebarsTemplateEngine;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static spark.Spark.*;
 
 public class App {
     static int getHerokuAssignedPort() {
@@ -13,8 +19,21 @@ public class App {
     public static void main(String[] args){
         port(getHerokuAssignedPort());
         staticFileLocation("/public");
+        String connectionString = "jdbc:postgresql://ec2-23-21-246-11.compute-1.amazonaws.com:5432/d6isspi7k46sgs";
+        Sql2o sql2o = new Sql2o(connectionString, "", "");
+
+
+
+        //display homepage
+        get("/", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("template", "templates/addAnimal.hbs" );
+            return new ModelAndView(model, "addAnimal.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //display animal form
+
+
     }
 
-    //display homepage
-    get()
 }
