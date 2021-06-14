@@ -27,12 +27,18 @@ public class App {
         //display homepage
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("template", "templates/addAnimal.hbs" );
-            return new ModelAndView(model, "addAnimal.hbs");
+            model.put("template", "templates/index.hbs" );
+            return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
         //display animal form
+        get("/animal/new",(request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "addAnimal.hbs");
+        },new HandlebarsTemplateEngine());
 
+        //add new animal
+        post()
 
     }
 
