@@ -59,30 +59,44 @@ public class App {
             return null;
         });
 
-        //add new endangered form
+        //processing new endangered form
         post("/endangered_animal",(request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             int animal_id = Integer.parseInt(request.queryParams("endangeredAnimalSelected"));
             String health = request.queryParams("health");
             String age = request.queryParams("age");
             String location = request.queryParams("location");
-            String rangerName = request.queryParams("rangerName");
+            String RangerName = request.queryParams("RangerName");
             int id=Integer.parseInt(request.queryParams("id"));
-            Sighting newSighting = new Sighting(animal_id, location, rangerName,id);
+            Sighting newSighting = new Sighting(animal_id, location, RangerName,id);
             newSighting.save();
             model.put("newSighting",newSighting);
+            model.put("animals", Animal.all());
+            String animal = Animal.find(animal_id).getName();
+            model.put("animal", animal);
             return new ModelAndView(model, "allAnimals.hbs");
         },new HandlebarsTemplateEngine());
 
-        //add sighting form
+        //processing sighting form
         post("/sighting/add",(request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             int animal_id = Integer.parseInt(request.queryParams("animalSelected"));
-            String location = request.queryParams("location);
-            String RangerName = request.queryParams("RangerName");
-            int id=Integer.parseInt(request.queryParams("animalSelected"));
-            Sighting sighting = new Sighting(animal_id, location, RangerName,id);
-        })
+            String location = request.queryParams("location");
+            String RangerName=request.queryParams("RangerName");
+            int id=Integer.parseInt(request.queryParams("id"));
+            Sighting newSighting = new Sighting(animal_id, location, RangerName,id);
+            newSighting.save();
+            model.put("newSighting",newSighting);
+            return new ModelAndView(model, "allSightings.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //display sighting form
+        get("/sighting", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            model.put("animals", Animal.all());
+            model.put("endangeredAnimals", Endangered.all());
+            return new ModelAndView(model, "allSightings.hbs");
+        },new HandlebarsTemplateEngine());
     }
 
 }
