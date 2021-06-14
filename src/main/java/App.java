@@ -1,3 +1,6 @@
+import models.Animal;
+import models.Endangered;
+import models.Sighting;
 import org.sql2o.Sql2o;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -38,8 +41,48 @@ public class App {
         },new HandlebarsTemplateEngine());
 
         //add new animal
-        post()
+        post("animal/add",(request, response) -> {
+            boolean endangered = request.queryParams("endangered")!=null;
+            if (endangered) {
+                String name = request.queryParams("name");
+                int id =Integer.parseInt(request.queryParams("id"));
+                String health=request.queryParams("health");
+                String age=request.queryParams("age");
+                Endangered endangeredAnimal = new Endangered(name,id,endangered,health,age);
+                endangeredAnimal.save();
+            } else {
+                String name = request.queryParams("name");
+                Animal animal = new Animal(name);
+                animal.save();
+            }
+            response.redirect("/");
+            return null;
+        });
 
+        //add new endangered form
+        post("/endangered_animal",(request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            int animal_id = Integer.parseInt(request.queryParams("endangeredAnimalSelected"));
+            String health = request.queryParams("health");
+            String age = request.queryParams("age");
+            String location = request.queryParams("location");
+            String rangerName = request.queryParams("rangerName");
+            int id=Integer.parseInt(request.queryParams("id"));
+            Sighting newSighting = new Sighting(animal_id, location, rangerName,id);
+            newSighting.save();
+            model.put("newSighting",newSighting);
+            return new ModelAndView(model, "allAnimals.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //add sighting form
+        post("/sighting/add",(request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            int animal_id = Integer.parseInt(request.queryParams("animalSelected"));
+            String location = request.queryParams("location);
+            String RangerName = request.queryParams("RangerName");
+            int id=Integer.parseInt(request.queryParams("animalSelected"));
+            Sighting sighting = new Sighting(animal_id, location, RangerName,id);
+        })
     }
 
 }
