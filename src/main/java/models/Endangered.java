@@ -9,9 +9,9 @@ public class Endangered {
     public int id;
     public boolean endangered;
     public String health;
-    public int age;
+    public String age;
 
-    public Endangered(String name,int id, boolean endangered, String health, int age){
+    public Endangered(String name,int id, boolean endangered, String health, String age){
         this.name=name;
         this.id=id;
         this.endangered=endangered;
@@ -35,7 +35,7 @@ public class Endangered {
         return health;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 

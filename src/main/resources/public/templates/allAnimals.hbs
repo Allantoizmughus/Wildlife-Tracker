@@ -1,3 +1,21 @@
 {{#partial "contnet"}}
+    <div class="row">
+        <div class="col">
+            <h1 class="display-4">Animals</h1>
+            {{#if animals}}
+                {{#each animals}}
+                    <div class="alert alert-info">
+                        <p><strong>Name:</strong> {{name}}</p>
+                        <p><strong>ID:</strong> {{id}}</p>
+                    </div>
+                {{/each}}
+            {{else}}
+                <div class="alert alert-danger">
+                    List is empty!
+                </div>
+                <a href="/animal/new" class="btn btn-success">Add new animal</a>
+            {{/if}}
+        </div>
+    </div>
 {{/partial}}
 {{layout.hbs}}
