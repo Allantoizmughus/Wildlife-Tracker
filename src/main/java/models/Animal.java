@@ -47,9 +47,11 @@ public class Animal implements AnimalInterface {
     @Override
     public void add(Animal newAnimal) {
 
-        String sql = "INSERT INTO animals (id,name) VALUES (:name, :id)"; //raw sql
+        String sql = "INSERT INTO animals (name,id) VALUES (:name, :id)"; //raw sql
         try(Connection con = DB.sql2o.open()){ //try to open a connection
             int id = (int) con.createQuery(sql, true) //make a new variable
+                    .addParameter("name",this.name)
+                    .addParameter("id",this.id)
                     .bind(newAnimal)
                     .executeUpdate() //run it all
                     .getKey(); //int id is now the row number (row “key”) of db

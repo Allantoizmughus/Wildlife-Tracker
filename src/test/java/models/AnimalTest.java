@@ -1,12 +1,15 @@
 package models;
 
 import junit.framework.TestCase;
+import org.junit.Rule;
 import org.junit.Test;
 import org.sql2o.Connection;
 
 import static org.junit.Assert.*;
 
 public class AnimalTest {
+    @Rule
+    public DatabaseRule databaseRule=new DatabaseRule();
     private Animal animalDao; //ignore me for now. We'll create this soon.
     private Connection conn; //must be sql2o class conn
 

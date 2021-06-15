@@ -5,7 +5,9 @@
             <h1>Add your Record here!</h1>
             <form action="/animal/new" method="post">
                 <label>Animal Species</label>
-                <input type="text" name="name">
+                <input type="text" name="name" required>
+                <label>Animal id</label>
+                <input type="number" name="id" required>
                 <label>Endangered?</label>
                 <input type="checkbox" name="endangered">
                 <button type="submit" class="btn">Add Animal</button>
@@ -19,7 +21,14 @@
         <label>Select Endangered Animal</label>
         <select name="endangeredAnimalSelected">
             {{#each endangered}}
-            <option value="{{id}}">{{name}}</option>
+            <option value="{{name}}">{{name}}</option>
+            {{/each}}
+        </select>
+        </br>
+        <label>Animal id</label>
+        <select name="id">
+            {{#each endangered}}
+                <option value="{{id}}">{{id}}</option>
             {{/each}}
         </select>
         </br>
@@ -37,14 +46,13 @@
         <option>Adult</option>
     </select>
         </br>
-        <label>Location</label>
-        &emsp;<input type="text" name="latLong">
-        </br>
-        <label>Your Name</label>
-        &emsp;<input type="text" name="rangerName">
-        <br>
+<!--        <label>Location</label>-->
+<!--        &emsp;<input type="text" name="latLong">-->
+<!--        </br>-->
+<!--        <label>Your Name</label>-->
+<!--        &emsp;<input type="text" name="rangerName">-->
+<!--        <br>-->
         <button type="submit" class="btn">Submit Report</button>
-        #end
     </form>
 
 {{/partial}}

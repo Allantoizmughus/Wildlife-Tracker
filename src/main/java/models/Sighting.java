@@ -2,7 +2,6 @@ package models;
 
 import dao.SightingInterface;
 import org.sql2o.Connection;
-import org.sql2o.Sql2o;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -19,7 +18,7 @@ public class Sighting implements SightingInterface {
     public int id;
     public Timestamp date;
 
-    public Sighting(int animal_id, String location, String rangerName,int id){
+    public Sighting (int animal_id, String location, String rangerName, int id){
         this.animal_id=animal_id;
         this.location=location;
         this.rangerName=rangerName;

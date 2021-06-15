@@ -1,10 +1,11 @@
 package models;
 
+import dao.DatabaseManagementInterface;
 import org.sql2o.Connection;
 
 import java.util.List;
 
-public class Endangered {
+public class Endangered implements DatabaseManagementInterface {
     public String name;
     public int id;
     public boolean endangered;
@@ -17,6 +18,11 @@ public class Endangered {
         this.endangered=endangered;
         this.health=health;
         this.age=age;
+    }
+
+    public static Endangered findById(int animalId) {
+
+        return null;
     }
 
     public String getName() {
@@ -51,7 +57,7 @@ public class Endangered {
 
     public void save() {
         try(Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO endangered_animals (name) VALUES (:name);";
+            String sql = "INSERT INTO endangered (name) VALUES (:name);";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
                     .executeUpdate()
@@ -61,9 +67,12 @@ public class Endangered {
 
     public static List<Endangered> all() {
         try(Connection con = DB.sql2o.open()) {
-            String sql = "SELECT * FROM endangered_animals;";
+            String sql = "SELECT * FROM endangered;";
             return con.createQuery(sql)
                     .executeAndFetch(Endangered.class);
         }
+    }
+
+    public void update(String health, String age) {
     }
 }

@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS endangered (
   name VARCHAR,
   endangered boolean,
   health VARCHAR,
-  age int
+  age VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS sightings (

@@ -1,0 +1,35 @@
+{{#partial "content"}}
+    <h1>New Sighting</h1>
+    <div class=""form>
+        <form action="/sighting/add" method="post">
+            <label>Animal Id</label>
+            <select name="animalSelected">
+                {{#each animals}}
+                    <option value="{{animal_id}}">{{name}} ID:{{animal_id}}</option>
+                {{/each}}
+            </select>
+            </br>
+
+<!--            <label>Select Animal</label>-->
+<!--            &emsp;<select name="name">-->
+<!--            {{#each animals}}-->
+<!--            <option value="{{name}}">{{name}} ID:{{id}}</option>-->
+<!--            {{/each}}-->
+<!--        </select>-->
+            </br>
+            <label>Location</label>
+            &emsp;<input type="text" name="location">
+            </br>
+            <label>Your Name</label>
+            &emsp;<input type="text" name="RangerName">
+            </br>
+            <label>ID</label>
+            &emsp;<input type="number" name="id">
+            </br>
+            <button type="submit" class="btn">Submit Report</button>
+            #end
+        </form>
+    </div>
+
+{{/partial}}
+{{>layout.hbs}}
