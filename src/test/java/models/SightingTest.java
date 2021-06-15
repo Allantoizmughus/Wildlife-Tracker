@@ -5,10 +5,12 @@ import org.junit.Test;
 
 import java.sql.Timestamp;
 
-public class SightingTest extends TestCase {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+public class SightingTest {
 
     public void setUp() throws Exception {
-        super.setUp();
     }
 
     public void tearDown() throws Exception {
@@ -51,6 +53,8 @@ public class SightingTest extends TestCase {
         assertTrue(Sighting.all().get(1).equals(newSighting));
 
     }
+
+
 
     @Test
     public void returnAllInstancesOfSighting(){

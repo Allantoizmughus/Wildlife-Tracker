@@ -51,7 +51,8 @@ public class App {
                 endangeredAnimal.save();
             } else {
                 String name = request.queryParams("name");
-                Animal animal = new Animal(name);
+                int id =Integer.parseInt(request.queryParams("id"));
+                Animal animal =new Animal("name",id);
                 animal.save();
             }
             response.redirect("/");
@@ -71,7 +72,7 @@ public class App {
             newSighting.save();
             model.put("newSighting",newSighting);
             model.put("animals", Animal.all());
-            String animal = Animal.find(animal_id).getName();
+            String animal = Animal.findById(animal_id).getName();
             model.put("animal", animal);
             return new ModelAndView(model, "allAnimals.hbs");
         },new HandlebarsTemplateEngine());

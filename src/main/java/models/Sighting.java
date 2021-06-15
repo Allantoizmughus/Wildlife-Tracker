@@ -2,11 +2,17 @@ package models;
 
 import dao.SightingInterface;
 import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 public class Sighting implements SightingInterface {
+//    private final Sql2o sql2o;
+//
+//    public Sighting(Sql2o sql2o){
+//        this.sql2o=sql2o; //making the sql2o object available everywhere so we can call methods in it
+//    }
     public int animal_id;
     public String location;
     public String rangerName;

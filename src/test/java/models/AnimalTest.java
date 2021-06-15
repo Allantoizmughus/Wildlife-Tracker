@@ -2,11 +2,16 @@ package models;
 
 import junit.framework.TestCase;
 import org.junit.Test;
+import org.sql2o.Connection;
 
-public class AnimalTest extends TestCase {
+import static org.junit.Assert.*;
+
+public class AnimalTest {
+    private Animal animalDao; //ignore me for now. We'll create this soon.
+    private Connection conn; //must be sql2o class conn
+
 
     public void setUp() throws Exception {
-        super.setUp();
     }
 
     public void tearDown() throws Exception {
@@ -14,56 +19,76 @@ public class AnimalTest extends TestCase {
 
     @Test
     public void returnAllInstancesOfAnimal_true(){
-        Animal newAnimal=new Animal("Lion");
+        Animal newAnimal=new Animal("Lion",1);
         assertEquals(true, newAnimal instanceof Animal);
     }
 
     @Test
     public void returnNameOfAnimal_String(){
-        Animal newAnimal=new Animal("Lion");
+        Animal newAnimal=new Animal("Lion",1);
         assertEquals("Lion", newAnimal.getName());
 
     }
     @Test
     public void returnIdOfAnimal_int(){
-        Animal newAnimal=new Animal("Lion");
+        Animal newAnimal=new Animal("Lion",1);
         assertEquals(1,newAnimal.getId());
     }
 
     @Test
     public void saveAnimalToDatabase(){
-        Animal newAnimal=new Animal("Lion");
+        Animal newAnimal=new Animal("Lion",1);
         newAnimal.save();
-        assertTrue(Animal.all().get(0).equals(newAnimal));
+        assertTrue(Animal.all().get(1).equals(newAnimal));
+
+    }
+
+    @Test
+    public void addingSightingSetsId() throws Exception{
+        Animal newAnimal=new Animal("Lion",1);
+        int originalAnimalId=newAnimal.getId();
+        animalDao.add(newAnimal);
+        assertNotEquals(originalAnimalId,newAnimal.getId());
+    }
+
+    @Test
+    public void updateAnimalChanges() throws Exception{
+        Animal newAnimal=new Animal("Lion",1);
+        animalDao.add(newAnimal);
+        animalDao.updateName(newAnimal.getId(),"Zebra");
+        Animal updateAnimal=animalDao.findById(newAnimal.getId());
+        assertNotEquals(newAnimal,updateAnimal.getName());
+
 
     }
 
     @Test
     public void returnsAllInstancesOfAnimal_true(){
-        Animal newAnimal=new Animal("Lion");
-        Animal newestAnimal=new Animal("Lioness");
-        assertEquals(true,Animal.all().get(0).equals(newAnimal));
-        assertEquals(true,Animal.all().get(1).equals(newestAnimal));
+        Animal newAnimal=new Animal("Lion",1);
+        Animal newestAnimal=new Animal("Lioness",2);
+        assertEquals(true,Animal.all().get(1).equals(newAnimal));
+        assertEquals(true,Animal.all().get(2).equals(newestAnimal));
 
     }
 
     @Test
     public void findAnimalWithId(){
-        Animal newAnimal=new Animal("Lion");
-        newAnimal.save();
-        Animal newestAnimal=new Animal("Lioness");
-        newestAnimal.save();
-        assertEquals(Animal.find(newestAnimal.getId()),newestAnimal);
+        Animal newAnimal=new Animal("Lion",1);
+        int originalSightingId=newAnimal.getId();
+        animalDao.add(newAnimal);
+        assertEquals(originalSightingId, animalDao.findById(newAnimal.getId()).getId());
+
+
     }
 
 
 
     @Test
     public void deleteAnimal_true(){
-        Animal newAnimal=new Animal("Lion");
+        Animal newAnimal=new Animal("Lion",1);
         newAnimal.save();
-        newAnimal.delete();
-        assertEquals(null,Animal.find(newAnimal.getId()));
+        newAnimal.delete(1);
+        assertEquals(null,Animal.findById(newAnimal.getId()));
 
     }
 
