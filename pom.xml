@@ -24,16 +24,16 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.postgresql</groupId>-->
-        <!--            <artifactId>postgresql</artifactId>-->
-        <!--            <version>9.4.1208</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.sql2o</groupId>-->
-        <!--            <artifactId>sql2o</artifactId>-->
-        <!--            <version>1.5.4</version>-->
-        <!--        </dependency>-->
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <version>9.4.1208</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.sql2o</groupId>
+                    <artifactId>sql2o</artifactId>
+                    <version>1.5.4</version>
+                </dependency>
     </dependencies>
     <build>
         <plugins>
