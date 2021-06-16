@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mycompany.app</groupId>
-    <artifactId>mughero</artifactId>
+    <artifactId>wildt</artifactId>
     <version>1.0</version>
     <dependencies>
         <!-- We need to list out ALL dependencies our project needs. If you have dependencies not listed here, but sure to add them -->
@@ -80,9 +80,9 @@
                 <configuration>
                     <jdkVersion>1.8</jdkVersion>
                     <!-- Change this to YOUR application name! -->
-                    <appName>mughero</appName>
+                    <appName>Wildt</appName>
                     <processTypes>
-                        <web>java -jar target/mughero-1.0-jar-with-dependencies.jar</web>
+                        <web>java -jar target/wildt-1.0-jar-with-dependencies.jar</web>
                     </processTypes>
                 </configuration>
             </plugin>

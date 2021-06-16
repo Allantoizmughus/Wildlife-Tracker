@@ -6,6 +6,9 @@ plugins {
 group 'JavaIPWildlifeTracker'
 version '1.0-SNAPSHOT'
 
+applicationName = 'wildt'
+archivesBaseName = "JavaIP-WildlifeTracker"
+
 mainClassName = 'App'
 
 sourceCompatibility = 1.8

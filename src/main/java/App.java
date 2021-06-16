@@ -22,8 +22,8 @@ public class App {
     public static void main(String[] args){
         port(getHerokuAssignedPort());
         staticFileLocation("/public");
-        //String connectionString = "jdbc:postgresql://localhost:4567/wildlife_tracker?user=moringa&password=Access";
-        //Sql2o sql2o = new Sql2o(connectionString, "", "");
+        String connectionString = "jdbc:postgresql://ec2-52-23-45-36.compute-1.amazonaws.com:5432/d3a4kfh2ek5hms";
+        Sql2o sql2o = new Sql2o(connectionString, "opjfyysnghexnq", "4ce549c7755a5b7efa892829719479efc2070d3c20840c70a58192dbc2296de2");
 
 
 
