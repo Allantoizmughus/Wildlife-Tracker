@@ -24,3 +24,8 @@ position: fixed;
 nav{
 margin:10px;
 }
+
+.row>.col{
+margin-left:30px;
+margin-right:50px;
+}

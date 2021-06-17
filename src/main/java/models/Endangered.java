@@ -11,10 +11,11 @@ public class Endangered implements DatabaseManagementInterface {
     public boolean endangered;
     public String health;
     public String age;
+    public int animalId;
 
     public Endangered(String name,int id, boolean endangered, String health, String age){
         this.name=name;
-        this.id=id;
+        this.id=1;
         this.endangered=endangered;
         this.health=health;
         this.age=age;
